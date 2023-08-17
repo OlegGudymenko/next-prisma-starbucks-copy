@@ -9,6 +9,7 @@ import { useSession, signIn, signOut } from "next-auth/react"
 export default function SignUp() {
   const { push } = useRouter();
   const { data: session } = useSession()
+  
   useEffect(() => {
     if(session) {
       push('/')
