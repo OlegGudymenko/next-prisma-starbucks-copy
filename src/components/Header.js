@@ -1,12 +1,13 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from 'next/navigation';
-
 import Link from 'next/link';
+import { FaMapMarkerAlt } from "react-icons/fa";
+import styled from '@emotion/styled'
+
 import Button from '@/components/Button';
 import SvgComponent from '@/components/icons/Logo';
 
-import { FaMapMarkerAlt } from "react-icons/fa";
-
+const ShadowWrapper = styled.div`box-shadow: 0 1px 3px rgba(0,0,0,.1), 0 2px 2px rgba(0,0,0,.06), 0 0 2px rgba(0,0,0,.07);`
 
 const NAV_LINKS = [
   {
@@ -23,8 +24,6 @@ const NAV_LINKS = [
   },
 ]
 
-// 1.5rem = 2.4rem
-// base font size 10px
 const Header = () => {
   const { push } = useRouter();
   const { data: session } = useSession()
@@ -59,15 +58,17 @@ const Header = () => {
   }
 
   return (
-    <header className='h-[100px] flex items-center bg-white'>
-      <nav className='px-10 flex items-center w-full'>
-        {renderLogo()}
-        <div className='flex w-full'>
-          {renderNavLinks()}
-          {renderActionsButtons()}
-        </div>
-      </nav>
-    </header>
+    <ShadowWrapper>
+      <header className='h-[100px] flex items-center bg-white shadow-md relative'>
+        <nav className='px-10 flex items-center w-full'>
+          {renderLogo()}
+          <div className='flex w-full'>
+            {renderNavLinks()}
+            {renderActionsButtons()}
+          </div>
+        </nav>
+      </header>
+    </ShadowWrapper>
   )
 }
 

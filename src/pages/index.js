@@ -7,10 +7,11 @@ export default function Home() {
 
   console.log(session,'session')
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex  flex-col items-center justify-between p-24">
 
+    
+      <div className="mb-32 max-w-lg ">
       <h2>Home page</h2>
-      <div className="mb-32 ">
        {!session && <Link href='/account/signin'
          className='text-blue-500 underline'>Sign IN</Link>} 
       </div>
