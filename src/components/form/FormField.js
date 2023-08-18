@@ -1,5 +1,6 @@
 import { useState } from 'react'
-
+import { clsx } from 'clsx';
+import { useController,} from 'react-hook-form';
 import { 
   OutlinedInput,
   InputLabel,
@@ -8,35 +9,61 @@ import {
   FormControl,
   IconButton,
  }from '@mui/material';
- import { MdVisibility, MdVisibilityOff } from "react-icons/md";
- import { TiDelete } from "react-icons/ti";
- 
-export const ReuqiredElement = () => <span className='text-green-800 text-2xl'>*</span>
+import { MdVisibility, MdVisibilityOff } from "react-icons/md";
+import { TiDelete } from "react-icons/ti";
+import { RxCross1 } from "react-icons/rx";
+
+export const ReuqiredElement = ({ error }) => 
+  <span className={clsx(error ? 'text-red-500': 'text-green-700', 'text-2xl mx-1')}
+  >*</span>;
 
 const FormField = (props) => {
   const { 
     label, 
     type = 'text', 
-    id, 
-    error,
+    name,
+    control,
     tooltip,
     required
   } = props;
-  const [showPassword, setShowPassword] = useState(false);
-
-
-  const handleShowPassword = () => setShowPassword((show) => !show);
 
   const isPasswordField = type === 'password';
 
+  const [showPassword, setShowPassword] = useState(!isPasswordField);
+
+
+  const {
+    field,
+    fieldState: { error },
+  } = useController({
+    name,
+    control,
+    rules: { required },
+  });
+  console.log(field,'field')
+  console.log(error,'error in input ')
+
+  const handleShowPassword = () => setShowPassword((show) => !show);
+
+  const hasError = !!error;
+
   return (
     <FormControl fullWidth variant="outlined">
-      <InputLabel htmlFor={id}>
-        <p className='bg-white pr-2 text-black text-xl'> { required && <ReuqiredElement/> } {label}</p>
+      <InputLabel htmlFor={name}>
+        <p className={clsx('flex bg-white pr-2 text-black text-lg', {
+          'text-red-500': hasError
+        })}> { required && <ReuqiredElement error={hasError}/> } {label}</p>
       </InputLabel>
       <OutlinedInput
-        id={id}
-        
+        id={name}
+        classes={{
+          root: 'rounded-xl'
+        }}
+        onChange={field.onChange}
+        onBlur={field.onBlur}
+        value={field.value}
+        name={field.name}
+        error={hasError}
         type={showPassword ? 'text' : 'password'}
         endAdornment={
           <InputAdornment position="end" >
@@ -61,10 +88,14 @@ const FormField = (props) => {
             </div>
           </InputAdornment>
         }
-        label="* Password"
       />
-      {tooltip &&  <FormHelperText className='text-base text-black mt-1' id={id}>{tooltip}</FormHelperText>}
-      {error && <FormHelperText className='text-red-500' id={id}>{error}</FormHelperText>}
+      {tooltip && <FormHelperText className='text-base text-black mt-1' id={name}>{tooltip}</FormHelperText>}
+      {hasError && (
+        <div className='flex items-center ml-3'>
+          <RxCross1 className='text-red-500 mr-1 text-base'/>
+          <FormHelperText className='text-sm text-black mx-0' id={name}>{error.message}</FormHelperText>
+        </div>
+      )}
     </FormControl>
   )
 }

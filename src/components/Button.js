@@ -7,7 +7,9 @@ const Button = (props) => {
     outlined,
     contained,
     color,
-    className
+    className,
+    type = 'button',
+    
   } = props;
 
   const colors = {
@@ -32,7 +34,7 @@ const Button = (props) => {
     className || ''
   );
 
-  return <button className={styles} onClick={onClick}>{children}</button>
+  return <button type={type} className={styles} onClick={onClick}>{children}</button>
 }
 
 export default Button;

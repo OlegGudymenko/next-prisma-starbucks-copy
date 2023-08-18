@@ -1,19 +1,22 @@
 import NextAuth from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { compare } from "bcrypt";
 
 import { prisma } from '@/db/prisma'
 
 export const authOptions = {
   adapter: PrismaAdapter(prisma),
+  secret: process.env.NEXTAUTH_SECRET,
+  session: {
+    strategy: 'jwt',
+  },
   providers: [
     CredentialsProvider({
       name: "Credentials",
       async authorize(credentials) {
-        console.log(credentials,'credentials')
         const { email, password } = credentials
-        console.log(email,'email in auth')
-        console.log(password,'password in auth')
+
         if(!email || !password) {
           return null;
         }
@@ -25,21 +28,15 @@ export const authOptions = {
         })
 
         if(!user) {
-          return {
-            message: 'invalid user'
-          };
+          throw new Error( JSON.stringify({ message: 'Account with this email not found. Please try again.', status: false }))
         }
 
         const passwordMatch = await compare(password, user.password);
         if(!passwordMatch) {
-          return null;
+          throw new Error( JSON.stringify({ message: 'Password is invalid. Please try again.', status: false }))
         }
 
-        return {
-          id: user.id,
-          email: user.email,
-          username: user.username
-        }
+        return user
       }
     })
   ],
