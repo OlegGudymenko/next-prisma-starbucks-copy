@@ -18,7 +18,6 @@ import LoaderButton from '@/components/LoaderButton';
 import FormWrapper from '@/components/form/FormWrapper';
 import FormField, { ReuqiredElement } from '@/components/form/FormField';
 
-
 export default function SignIn() {
   const { push } = useRouter();
   const { data: session } = useSession()
@@ -39,7 +38,6 @@ export default function SignIn() {
     mode: 'onChange',
   });
 
- 
   const onSubmit = async (data) => {
     setLoading(true);
     setError('')
@@ -61,7 +59,7 @@ export default function SignIn() {
   }
 
   return (
-    <div className="container mx-auto bg-white min-h-screen "> 
+    <div className="container mx-auto bg-white min-h-screen"> 
      <div className='mx-auto max-w-lg w-full '> 
       <h1 className='text-center py-12 mb-2 text-black font-bold text-3xl'>Sign in or create an account</h1>
       <FormWrapper onSubmit={handleSubmit(onSubmit)}> 
