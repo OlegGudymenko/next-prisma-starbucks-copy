@@ -18,7 +18,7 @@ const Button = (props) => {
       '': contained
     }),
     black: clsx({
-      'bg-white border-black text-black hover:bg-gray-200': outlined,
+      'border-black text-black hover:bg-black/10': outlined,
       'bg-black border-black text-white hover:bg-gray-700 hover:border-gray-700': contained
     }),
     green: clsx({

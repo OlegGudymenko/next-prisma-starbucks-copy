@@ -3,7 +3,6 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { FaMapMarkerAlt } from "react-icons/fa";
 import styled from '@emotion/styled'
-
 import Button from '@/components/Button';
 import SvgComponent from '@/components/icons/Logo';
 
@@ -43,19 +42,20 @@ const Header = () => {
     </ul>
   )
 
-  const renderActionsButtons = () => {
-    return session ? 'Profile' :
-      <div className="ml-auto">
-        
-        <div className='space-x-2.5 flex items-center'>
-          <Link className='pr-4 mr-8 flex text-black hover:text-green-700 font-semibold text-sm' href={'/'}>
-            <FaMapMarkerAlt className="text-2xl mr-3" /><span>Find a store</span>
-          </Link>
-          <Button onClick={() => push('/account/signin')} color='black' className='mr-2' outlined>Sign In</Button>
-          <Button onClick={() => push('/account/signup')} color='black' contained>Join now</Button>
-        </div>
+  const renderActionsButtons = () => 
+    <div className="ml-auto">
+        { session
+          ? <div className='space-x-2.5 flex items-end'>Profile </div>
+          : (
+          <div className='space-x-2.5 flex items-center'>
+            <Link className='pr-4 mr-8 flex text-black hover:text-green-700 font-semibold text-sm' href={'/'}>
+              <FaMapMarkerAlt className="text-2xl mr-3" /><span>Find a store</span>
+            </Link>
+            <Button onClick={() => push('/account/signin')} color='black' className='mr-2' outlined>Sign In</Button>
+            <Button onClick={() => push('/account/signup')} color='black' contained>Join now</Button>
+          </div>
+          )}
       </div>
-  }
 
   return (
     <ShadowWrapper>

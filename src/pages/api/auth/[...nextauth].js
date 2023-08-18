@@ -49,12 +49,13 @@ export const authOptions = {
       return await token;
     },
     async session({ session, token, user }) {
-      // Send properties to the client, like an access_token from a provider.
-      // session.accessToken = token.accessToken
-      if (user !== null) {
-        session.user = user;
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          username: token.email
+        }
       }
-      return session
     }
   },
 }

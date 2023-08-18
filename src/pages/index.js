@@ -1,23 +1,28 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import { useSession } from "next-auth/react"
+import BlogPost from '@/components/BlogPost'
 
-export default function Home() {
+
+export default function Home({ posts }) {
   const { data: session } = useSession()
 
   console.log(session,'session')
-  return (
-    <main className="flex  flex-col items-center justify-between p-24">
+  console.log(posts,'posts')
 
-    
-      <div className="mb-32 max-w-lg ">
-      <h2>Home page</h2>
-       {!session && <Link href='/account/signin'
-         className='text-blue-500 underline'>Sign IN</Link>} 
-      </div>
-      test
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-      </div>
-    </main>
+  return (
+    <div className="flex flex-col">
+      {posts.map(item => <div className='mt-8'><BlogPost key={item.id} {...item}/></div>)}
+    </div>
   )
+}
+
+export async function getServerSideProps() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/posts`);
+  const posts = await res.json();
+
+  return {
+    props: {
+      posts: posts.data || [],
+    },
+  }
 }
