@@ -22,7 +22,7 @@ export default function EditPostAdmin() {
     }
   },[session])
 
-  const { isLoading, error, data, refetch } = useQuery({
+  const { isLoading, error, data } = useQuery({
     queryKey: ['postData'],
     enabled: !!postId,
     queryFn: () =>
@@ -32,12 +32,19 @@ export default function EditPostAdmin() {
   })
 
   const editPostMutation = useMutation({
-    mutationFn: async () => {
+    mutationFn: async (data) => {
       return await fetch(`/api/posts/${postId}`, {
         method: 'PUT',
+        headers: {
+          "Content-Type": 'application/json'
+        },
+        body: JSON.stringify({
+          ...data,
+          id: parseInt(data.id)
+        })
       })
     },
-    onSuccess: () => refetch(),
+    onSuccess: () => push('/admin'),
     onError: (err) => {
       console.log(err)
     }
