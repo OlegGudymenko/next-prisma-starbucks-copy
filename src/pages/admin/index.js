@@ -1,48 +1,50 @@
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation';
+import { useQuery, useMutation } from '@tanstack/react-query'
 
 import { useSession } from "next-auth/react"
 import BlogsTable from '@/components/Table'
+import Link from 'next/link';
+import Button from '@/components/Button';
 
 
 export default function Admin() {
   const {data: session, status} = useSession()
+  const { push } = useRouter();
 
-  const [data, setData] = useState([])
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  useEffect(() => {
+    if(!session && status !== 'loading') {
+      push('/')
+    }
+  },[session])
 
-  const fetchPosts = async () => {
-    setLoading(true)
-    try {
-      const response = await fetch('/api/posts', {
+  const { isLoading, data } = useQuery({
+    queryKey: ['posts'],
+    enabled: !!(session && status !== 'loading'),
+    queryFn: () =>
+      fetch('/api/posts', {
         method: 'GET',
         headers: {
           "Content-Type": 'application/json'
         },
-      })
-      const { data } = await response.json();
-
-      setData(data)
-      setLoading(false)
-    }catch(err){
-      console.log(err)
-      setLoading(false)
-    }
-  }
-
-
-  useEffect(() => {
-    if(session && status !== 'loading' ) {
-      fetchPosts();
-    }
-  },[session, status])
-
-  if(status === 'loading' || loading) return '...loading'
-
+      }).then(res => res.json())
+  })
+  
   return (
     <div className="flex flex-col min-h-screen ">
-      <h2 className='mx-auto my-6 text-3xl'>Admin</h2>
-      <BlogsTable data={data}/>
+      <h2 className='mx-auto my-4 text-3xl'>Admin</h2>
+      <div className='container mx-auto mb-6 flex justify-end'>
+        <Button 
+          type='submit' 
+          className='mr-2 px-8 py-2'
+          color='green'
+          outlined
+          onClick={() => push('/admin/post/create')}
+        >Create new post</Button>
+      </div>
+     {status === 'loading' || isLoading  
+     ? '...loading'
+     : <BlogsTable data={data?.data || []}/>}
     </div>
   )
 }

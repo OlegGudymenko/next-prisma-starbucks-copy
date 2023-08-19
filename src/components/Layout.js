@@ -13,10 +13,9 @@ const lightTheme = createTheme({
 export default function Layout({ children }) {
   return (
     <ThemeProvider theme={lightTheme}>
-      <div className='bg-white text-black'>
+      <div className='bg-white text-black min-h-screen'>
       <CssBaseline />
         <Navbar />
-        {/* {children} */}
         <main className=''>{children}</main>
         <Footer />
       </div>

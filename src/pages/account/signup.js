@@ -66,13 +66,14 @@ export default function SignUp() {
 
 
   return (
-  <div className="container mx-auto bg-white min-h-screen "> 
+  <div className="container mx-auto bg-white min-h-screen"> 
     <div className='mx-auto max-w-xl w-full '> 
       <div className='text-center pb-10'>
         <h1 className='py-12 mb-2 text-black font-bold text-3xl'>Create an account</h1>
         <h4 className='mb-3 font-bold text-gray-700 text-sm'>STARBUCKS® REWARDS</h4>
         <p className='px-4 text-gray-600 text-sm'>Join Starbucks Rewards to earn Stars for free food and drinks, any way you pay. Get access to mobile ordering, a birthday Reward, and 
-          <Link href='more'>more</Link>.</p>
+          <Link href='more'>more</Link>.
+        </p>
       </div>
 
       <FormWrapper onSubmit={handleSubmit(onSubmit)}> 

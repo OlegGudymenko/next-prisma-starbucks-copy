@@ -1,10 +1,13 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from 'next/navigation';
+import { signOut } from "next-auth/react"
+
 import Link from 'next/link';
 import { FaMapMarkerAlt } from "react-icons/fa";
 import styled from '@emotion/styled'
 import Button from '@/components/Button';
 import SvgComponent from '@/components/icons/Logo';
+import { Fragment } from "react";
 
 const ShadowWrapper = styled.div`box-shadow: 0 1px 3px rgba(0,0,0,.1), 0 2px 2px rgba(0,0,0,.06), 0 0 2px rgba(0,0,0,.07);`
 
@@ -34,7 +37,6 @@ const Header = () => {
     </div>
   );
 
-
   const renderNavLinks = () => (
     <ul className="flex gap-x-6">
       {NAV_LINKS.map(({value, label}) => 
@@ -44,17 +46,18 @@ const Header = () => {
 
   const renderActionsButtons = () => 
     <div className="ml-auto">
-        { session
-          ? <div className='space-x-2.5 flex items-end'>Profile </div>
-          : (
-          <div className='space-x-2.5 flex items-center'>
-            <Link className='pr-4 mr-8 flex text-black hover:text-green-700 font-semibold text-sm' href={'/'}>
-              <FaMapMarkerAlt className="text-2xl mr-3" /><span>Find a store</span>
-            </Link>
-            <Button onClick={() => push('/account/signin')} color='black' className='mr-2' outlined>Sign In</Button>
-            <Button onClick={() => push('/account/signup')} color='black' contained>Join now</Button>
-          </div>
-          )}
+       <div className='space-x-2.5 flex items-center'>
+          <Link className='pr-4 mr-8 flex text-black hover:text-green-700 font-semibold text-sm' href={'/'}>
+            <FaMapMarkerAlt className="text-2xl mr-3" /><span>Find a store</span>
+          </Link>
+          { session 
+            ?  <Button onClick={() => signOut()} color='black'  outlined>Log out</Button>
+            : <Fragment>
+                <Button onClick={() => push('/account/signin')} color='black' className='mr-2' outlined>Sign In</Button>
+                <Button onClick={() => push('/account/signup')} color='black' contained>Join now</Button>
+              </Fragment>
+          }
+        </div>
       </div>
 
   return (

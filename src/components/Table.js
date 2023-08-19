@@ -15,7 +15,7 @@ const BlogsTable = ({
   const { push } = useRouter();
 
   const handleSelect = (postId) => {
-    push(`/admin/${postId}`)
+    push(`/admin/post/${postId}`)
   }
 
   return (
@@ -27,9 +27,7 @@ const BlogsTable = ({
               <TableCell>Id</TableCell>
               <TableCell>Title</TableCell>
               <TableCell>Content</TableCell>
-              <TableCell>Button Text</TableCell>
-              <TableCell>Position</TableCell>
-              
+              <TableCell>Button Text</TableCell>              
               <TableCell>Image position</TableCell>
             </TableRow>
           </TableHead>
@@ -39,6 +37,7 @@ const BlogsTable = ({
                 onClick={() => handleSelect(row.id)}
                 key={row.id}
                 hover
+                className='cursor-pointer'
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell>{row.id}</TableCell>
@@ -47,7 +46,6 @@ const BlogsTable = ({
                 </TableCell>
                 <TableCell>{row.content.slice(0, 15)}</TableCell>
                 <TableCell>{row.buttonText}</TableCell>
-                <TableCell>{row.position}</TableCell>
                 <TableCell>{row.imagePosition}</TableCell>
               </TableRow>
             ))}

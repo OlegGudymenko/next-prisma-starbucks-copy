@@ -19,7 +19,6 @@ model Post {
   content       String
   link          String
   buttonText    String
-  position      Int
   background    String        @default("")
   imageUrl      String
   imagePosition ImagePosition

@@ -34,8 +34,8 @@ const BlogPost = ({
         <Button 
           onClick={handleClick}
           className='text-lg rounded-full py-1.5 px-4' 
-
-          color='black' outlined>{buttonText}</Button>
+          outlined
+          color='black'>{buttonText}</Button>
       </div>
       {isImageRight && randerImage()}
     </div>

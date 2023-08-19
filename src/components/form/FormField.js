@@ -17,20 +17,19 @@ export const ReuqiredElement = ({ error }) =>
   <span className={clsx(error ? 'text-red-500': 'text-green-700', 'text-2xl mx-1')}
   >*</span>;
 
-const FormField = (props) => {
-  const { 
-    label, 
-    type = 'text', 
-    name,
-    control,
-    tooltip,
-    required
-  } = props;
+const FormField = ({ 
+  label, 
+  type = 'text', 
+  name,
+  control,
+  tooltip,
+  required,
+  ...props
+}) => {
 
   const isPasswordField = type === 'password';
 
   const [showPassword, setShowPassword] = useState(!isPasswordField);
-
 
   const {
     field,
@@ -40,8 +39,6 @@ const FormField = (props) => {
     control,
     rules: { required },
   });
-  console.log(field,'field')
-  console.log(error,'error in input ')
 
   const handleShowPassword = () => setShowPassword((show) => !show);
 
@@ -59,12 +56,10 @@ const FormField = (props) => {
         classes={{
           root: 'rounded-xl'
         }}
-        onChange={field.onChange}
-        onBlur={field.onBlur}
-        value={field.value}
-        name={field.name}
         error={hasError}
         type={showPassword ? 'text' : 'password'}
+        {...field}
+        {...props}
         endAdornment={
           <InputAdornment position="end" >
             <div>
