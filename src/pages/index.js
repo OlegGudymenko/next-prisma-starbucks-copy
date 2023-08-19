@@ -10,7 +10,10 @@ export default function Home({ posts }) {
 
   return (
     <div className="flex flex-col">
-      {posts.map(item => <div className='mt-8'><BlogPost key={item.id} {...item}/></div>)}
+      {posts.map(item => <div key={item.id} className='mt-8'><BlogPost {...item}/></div>)}
+      <div className="flex justify-center text-center py-8 mt-8">
+        <p className="text-sm">*Impossible is a trademark of Impossible Foods Inc. Used under license</p>
+      </div>
     </div>
   )
 }

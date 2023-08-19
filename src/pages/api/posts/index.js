@@ -3,7 +3,6 @@ import { prisma } from '@/db/prisma'
 export default async function handler(req, res) {
   if(req.method === 'POST') {
     try {
-      // position
       const data = await prisma.post.create({
         data: req.body
       })
@@ -17,10 +16,8 @@ export default async function handler(req, res) {
  
   if(req.method === 'GET') {
     try {
-      console.log('GET POSTS')
       const data = await prisma.post.findMany()
 
-      console.log(data,'Posts data')
       return res.status(200).json({ data , message: 'success'})
 
     } catch (err) {
