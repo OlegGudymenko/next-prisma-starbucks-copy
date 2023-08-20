@@ -23,6 +23,7 @@ model Post {
   imageUrl      String
   imagePosition ImagePosition
   published     Boolean       @default(false)
+  Action        Action[]
 }
 
 enum ImagePosition {
@@ -38,4 +39,21 @@ model User {
   email     String   @unique
   password  String
   createdAt DateTime @default(now())
+}
+
+model ClientInfo {
+  id         Int      @id @default(autoincrement())
+  screenSize String
+  ipAddress  String
+  userAgent  String
+  Action     Action[]
+}
+
+model Action {
+  id           Int        @id @default(autoincrement())
+  postId       Int
+  post         Post       @relation(fields: [postId], references: [id])
+  position     Int
+  clientInfo   ClientInfo @relation(fields: [clientInfoId], references: [id])
+  clientInfoId Int
 }

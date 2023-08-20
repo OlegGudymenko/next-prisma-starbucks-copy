@@ -6,7 +6,6 @@ export default function Home({ posts }) {
   const { data: session } = useSession()
 
   console.log(session,'session')
-  console.log(posts,'posts')
 
   return (
     <div className="flex flex-col">

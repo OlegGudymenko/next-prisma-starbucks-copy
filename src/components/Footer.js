@@ -38,9 +38,9 @@ const Footer = () => {
       <div>
         {SOCIAL_ICONS.map(({ value, icon }) => (
           <IconButton className='text-3xl text-black' key={value}>
-            <Link href={value}>
+            <a href={value}>
               {icon}
-            </Link>
+            </a>
           </IconButton>
         ))}
       </div>
@@ -55,7 +55,7 @@ const Footer = () => {
 
           const isFirst = index === 0;
           return (
-            <li>
+            <li key={value}>
               {index !== 0 && <span className='px-2'>|</span> } 
               <Link href={value} className={clsx('hover:underline', {
                   'pr-4': isFirst,
