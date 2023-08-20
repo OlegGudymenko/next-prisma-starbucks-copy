@@ -1,10 +1,9 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation';
-import { useQuery, useMutation } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 
 import { useSession } from "next-auth/react"
 import BlogsTable from '@/components/Table'
-import Link from 'next/link';
 import Button from '@/components/Button';
 
 
