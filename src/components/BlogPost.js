@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import Button from '@/components/Button'
 
 const BlogPost = ({
@@ -7,11 +8,25 @@ const BlogPost = ({
   buttonText,
   background,
   imageUrl,
-  imagePosition
+  imagePosition,
+  onAction,
+  id,
+  index
 }) => {
+  const { push } = useRouter();
 
   const handleClick = () => {
+    const userAgent = window.navigator.userAgent;
+    const { width, height } = window.screen;
 
+    onAction({
+      postId: id,
+      position: index + 1,
+      screenSize: `${width}x${height}`,
+      userAgent: userAgent
+    }).finally(() => {
+      push(link)
+    });
   }
 
   const randerImage = () => (
