@@ -2,7 +2,6 @@ import { SessionProvider } from "next-auth/react";
 import {
   QueryClient,
   QueryClientProvider,
-  useQuery,
 } from '@tanstack/react-query'
 import Layout from '../components/Layout';
  

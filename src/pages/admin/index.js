@@ -6,7 +6,6 @@ import { useSession } from "next-auth/react"
 import BlogsTable from '@/components/Table'
 import Button from '@/components/Button';
 
-
 export default function Admin() {
   const {data: session, status} = useSession()
   const { push } = useRouter();

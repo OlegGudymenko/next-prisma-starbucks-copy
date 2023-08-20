@@ -3,26 +3,7 @@ import { useEffect, useState } from 'react'
 
 import BlogPost from '@/components/BlogPost'
 
-
-export default function Home({  }) {  
-  const [posts, setPosts] = useState([]);
-
-  useEffect(async() => {
-    try{
-      const result = await fetch('/api/posts', {
-        method: 'GET',
-        headers: {
-          "Content-Type": 'application/json'
-        },
-      }).then(res => res.json())
-      console.log(result,'result ')
-      setPosts(result.data || [])
-    }catch(err) {
-      console.log(err,'catch error')
-    }
-
-  }, [])
-
+export default function Home({ posts }) {  
   const actionMutation = useMutation({
     mutationFn: async (data) => {
       return await fetch('/api/actions', {
@@ -50,14 +31,13 @@ export default function Home({  }) {
   )
 }
 
-// export async function getServerSideProps() {
-//   // console.log(process.env.NEXT_PUBLIC_API_ENDPOINT,'process.env.NEXT_PUBLIC_API_ENDPOINT')
-//   const res = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/posts`);
-//   const posts = await res.json();
-//   console.log(posts, 'res get posts')
-//   return {
-//     props: {
-//       posts: posts.data || [],
-//     },
-//   }
-// }
+export async function getServerSideProps() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/posts`);
+  const posts = await res.json();
+
+  return {
+    props: {
+      posts: posts.data || [],
+    },
+  }
+}
