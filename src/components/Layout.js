@@ -1,7 +1,7 @@
 import { ThemeProvider, CssBaseline } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 
-import Navbar from './Header';
+import Navbar from './header/Header';
 import Footer from './Footer';
 
 const lightTheme = createTheme({

@@ -25,3 +25,11 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.MuiPaper-elevation{
+  box-shadow: none !important;
+}
+.MuiAccordionSummary-content {
+  margin: 0!important;
+  margin-bottom: 1rem!important;
+}

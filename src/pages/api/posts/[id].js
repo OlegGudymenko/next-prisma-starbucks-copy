@@ -26,7 +26,6 @@ export default async function handler(req, res) {
   }
 
   if(method === 'PUT') {
-    console.log(body,'body req')
     try {
       const data = await prisma.post.findUnique({
         where: {
@@ -47,7 +46,6 @@ export default async function handler(req, res) {
         },
         data: body
       })
-      console.log(updatedPost,'updatedPost')
 
       return res.status(200).json({
         data: updatedPost,

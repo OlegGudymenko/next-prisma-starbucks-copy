@@ -26,7 +26,7 @@ const BlogPost = ({
       userAgent: userAgent
     }).finally(() => {
       push(link)
-    });
+    })
   }
 
   const randerImage = () => (
@@ -39,13 +39,13 @@ const BlogPost = ({
 
   const isImageRight = imagePosition === "RIGHT";
   return (
-    <div className='grid grid-cols-2' style={{
+    <div className='md:grid md:grid-cols-2' style={{
       backgroundColor: background
     }}>
       {!isImageRight && randerImage()}
-      <div className='mx-auto w-5/6 text-black flex flex-col items-center justify-center text-center px-12'>
-        <h2 className='w-11/12 tracking-[2px] text-5xl text-semibold mb-8'>{title}</h2>
-        <p className='text-2xl mb-6'>{content}</p>
+      <div className='mx-auto lg:w-5/6 text-black flex flex-col items-center justify-center text-center py-8 px-4 md:px-10 md:py-0 lg:px-12'>
+        <h2 className='w-11/12  tracking-[2px] text-3xl xl:text-5xl text-bold mb-8'>{title}</h2>
+        <p className='text-xl md:text-2xl xl:text-2xl mb-6'>{content}</p>
         <Button 
           onClick={handleClick}
           className='text-lg rounded-full py-1.5 px-4' 

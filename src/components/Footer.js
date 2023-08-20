@@ -1,6 +1,12 @@
 import Link from 'next/link';
 import styled from '@emotion/styled'
-import { Divider, IconButton } from '@mui/material';
+import { 
+  Divider, 
+  IconButton, 
+  Accordion, 
+  AccordionSummary, 
+  AccordionDetails
+} from '@mui/material';
 
 import { clsx } from 'clsx';
 import { 
@@ -9,7 +15,8 @@ import {
   BsPinterest, 
   BsInstagram,
   BsYoutube,
-  BsTwitter
+  BsTwitter,
+  BsChevronDown
 } from "react-icons/bs";
 
 
@@ -17,7 +24,7 @@ const FooterElement = styled.div`box-shadow: 0 -1px 3px rgba(0,0,0,.1), 0 -2px 2
 
 const Footer = () => {
 
-  const renderColumn = (columnData, isFirst) => {
+  const renderDesktopLinks = () => {
     const { title, list } = columnData;
     return (
       <div key={title} className={clsx('text-black md:w-48', { 'ml-8': !isFirst})}>
@@ -29,6 +36,62 @@ const Footer = () => {
             </li>
           ))} 
         </ul>
+      </div>
+    )
+  }
+  
+  const renderMainLinks = (columnData, isFirst) => {
+    const { title, list } = columnData;
+    return (
+      <div key={title} className={clsx('text-black md:w-48', { 'ml-8': !isFirst})}>
+        <h2 className='text-lg mb-6'>{title}</h2>
+        <ul className='flex flex-col'>
+          {list.map(({ value, label }) => (
+            <li key={value}>
+              <Link href={value} className='block pointer text-base py-2 mb-2 text-gray-500 hover:text-black'>{label}</Link>
+            </li>
+          ))} 
+        </ul>
+      </div>
+    )
+  };
+  // const renderMainLinks = (columnData, isFirst) => {
+  //   const { title, list } = columnData;
+  //   return (
+  //     <div key={title} className={clsx('text-black md:w-48', { 'ml-8': !isFirst})}>
+  //       <h2 className='text-lg mb-6'>{title}</h2>
+  //       <ul className='flex flex-col'>
+  //         {list.map(({ value, label }) => (
+  //           <li key={value}>
+  //             <Link href={value} className='block pointer text-base py-2 mb-2 text-gray-500 hover:text-black'>{label}</Link>
+  //           </li>
+  //         ))} 
+  //       </ul>
+  //     </div>
+  //   )
+  // };
+
+  const renderMainLinksMobile = (columnData) => {
+    const { title, list } = columnData;
+    return (
+      <div key={title} className='w-full text-black '>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<BsChevronDown className='text-2xl text-black' />}
+            id={title}
+          >
+            <h2 className='flex items-center text-lg py-2 h-12 lg:h-auto lg:py-0'>{title}</h2>
+          </AccordionSummary>
+          <AccordionDetails>
+            <ul className='flex flex-col'>
+              {list.map(({ value, label }) => (
+                <li key={value}>
+                  <Link href={value} className='block pointer text-base py-2 mb-2 text-gray-500 hover:text-black'>{label}</Link>
+                </li>
+              ))} 
+            </ul>
+          </AccordionDetails>
+        </Accordion>
       </div>
     )
   };
@@ -48,18 +111,16 @@ const Footer = () => {
   }
 
   const renderTermsLink = () => {
-
     return (
-      <ul className='flex flex-row mt-6 text-base'>
+      <ul className='flex flex-col lg:flex-row mt-6 text-md lg:text-base'>
         {TERMS_LINK.map(({ value, label }, index) => {
-
           const isFirst = index === 0;
           return (
             <li key={value}>
-              {index !== 0 && <span className='px-2'>|</span> } 
-              <Link href={value} className={clsx('hover:underline', {
-                  'pr-4': isFirst,
-                  'px-4': !isFirst
+              {index !== 0 && <span className='hidden lg:!inline px-2'>|</span> } 
+              <Link href={value} className={clsx('hover:underline py-2 mb-2 lg:py-0 lg:mb-0 block lg:inline', {
+                  'lg:pr-4': isFirst,
+                  'lg:px-4': !isFirst
                 })} 
               >{label}</Link>
             </li>
@@ -68,11 +129,16 @@ const Footer = () => {
       </ul>
     )
   }
+
+  
   return (
     <FooterElement>
-      <div className='px-10 py-6 w-full'>
-        <div className='flex'>
-          {LINKS_COLUMNS.map((column, index) => renderColumn(column, index === 0))}
+      <div className='px-6 lg:px-10 py-6 w-full'>
+        <div className='flex-col lg:flex-row hidden lg:!flex'>
+          {LINKS_COLUMNS.map((column, index) => renderMainLinks(column, index === 0))}
+        </div>
+        <div className='visbile lg:hidden'>
+          {LINKS_COLUMNS.map((column) => renderMainLinksMobile(column))}
         </div>
         <div className='py-8'>
           <Divider/>

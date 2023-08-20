@@ -34,7 +34,6 @@ export default function Home({ posts }) {
 export async function getServerSideProps() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/posts`);
   const posts = await res.json();
-  
   return {
     props: {
       posts: posts.data || [],

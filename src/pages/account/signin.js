@@ -48,7 +48,6 @@ export default function SignIn() {
     })
 
     setLoading(false)
-    console.log(signInData,'signInData')
 
     if(signInData.error) {
       const parsed = JSON.parse(signInData.error);
