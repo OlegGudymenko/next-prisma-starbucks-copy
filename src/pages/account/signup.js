@@ -36,7 +36,7 @@ export default function SignUp() {
     }
   },[session])
 
-  const { control, handleSubmit, watch, formState: { errors } } = useForm({
+  const { control, handleSubmit} = useForm({
     resolver: yupResolver(signUpSchema),
     mode: 'onChange',
   });
@@ -66,7 +66,7 @@ export default function SignUp() {
 
 
   return (
-  <div className="container mx-auto bg-white min-h-screen"> 
+  <div className="container mx-auto bg-white min-h-screen mb-10"> 
     <div className='mx-auto max-w-xl w-full '> 
       <div className='text-center pb-10'>
         <h1 className='py-12 mb-2 text-black font-bold text-3xl'>Create an account</h1>
