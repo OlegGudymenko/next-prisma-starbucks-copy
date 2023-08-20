@@ -1,6 +1,6 @@
 import { hash } from "bcrypt";
 
-import { prisma } from '@/db/prisma'
+import { prisma } from '../../../db/prisma';
 import { passwordRegex } from '@/utils/validation';
 
 export default async function handle(req, res) {
