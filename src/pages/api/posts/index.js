@@ -11,7 +11,7 @@ export default async function handler(req, res) {
       return res.status(200).json({ data, message: 'Post successfuly created' })
     } catch (err) {
       console.error(err)
-      return res.status(400).json({ msg: 'Something went wrong' })
+      return res.status(400).json({ msg: 'Something went wrong', err })
     }
   }
  
@@ -23,7 +23,7 @@ export default async function handler(req, res) {
 
     } catch (err) {
       console.error(err)
-      return res.status(500).json({ msg: 'Something went wrong' })
+      return res.status(500).json({ msg: 'Something went wrong', err })
     }
   }
 }

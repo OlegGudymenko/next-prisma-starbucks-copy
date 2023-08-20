@@ -19,27 +19,9 @@ import {
   BsChevronDown
 } from "react-icons/bs";
 
-
 const FooterElement = styled.div`box-shadow: 0 -1px 3px rgba(0,0,0,.1), 0 -2px 2px rgba(0,0,0,.06), 0 0 2px rgba(0,0,0,.07);`
 
 const Footer = () => {
-
-  const renderDesktopLinks = () => {
-    const { title, list } = columnData;
-    return (
-      <div key={title} className={clsx('text-black md:w-48', { 'ml-8': !isFirst})}>
-        <h2 className='text-lg mb-6'>{title}</h2>
-        <ul className='flex flex-col'>
-          {list.map(({ value, label }) => (
-            <li key={value}>
-              <Link href={value} className='block pointer text-base py-2 mb-2 text-gray-500 hover:text-black'>{label}</Link>
-            </li>
-          ))} 
-        </ul>
-      </div>
-    )
-  }
-  
   const renderMainLinks = (columnData, isFirst) => {
     const { title, list } = columnData;
     return (
@@ -47,7 +29,7 @@ const Footer = () => {
         <h2 className='text-lg mb-6'>{title}</h2>
         <ul className='flex flex-col'>
           {list.map(({ value, label }) => (
-            <li key={value}>
+            <li key={label}>
               <Link href={value} className='block pointer text-base py-2 mb-2 text-gray-500 hover:text-black'>{label}</Link>
             </li>
           ))} 
@@ -55,21 +37,6 @@ const Footer = () => {
       </div>
     )
   };
-  // const renderMainLinks = (columnData, isFirst) => {
-  //   const { title, list } = columnData;
-  //   return (
-  //     <div key={title} className={clsx('text-black md:w-48', { 'ml-8': !isFirst})}>
-  //       <h2 className='text-lg mb-6'>{title}</h2>
-  //       <ul className='flex flex-col'>
-  //         {list.map(({ value, label }) => (
-  //           <li key={value}>
-  //             <Link href={value} className='block pointer text-base py-2 mb-2 text-gray-500 hover:text-black'>{label}</Link>
-  //           </li>
-  //         ))} 
-  //       </ul>
-  //     </div>
-  //   )
-  // };
 
   const renderMainLinksMobile = (columnData) => {
     const { title, list } = columnData;
@@ -85,7 +52,7 @@ const Footer = () => {
           <AccordionDetails>
             <ul className='flex flex-col'>
               {list.map(({ value, label }) => (
-                <li key={value}>
+                <li key={label}>
                   <Link href={value} className='block pointer text-base py-2 mb-2 text-gray-500 hover:text-black'>{label}</Link>
                 </li>
               ))} 
@@ -116,7 +83,7 @@ const Footer = () => {
         {TERMS_LINK.map(({ value, label }, index) => {
           const isFirst = index === 0;
           return (
-            <li key={value}>
+            <li key={label}>
               {index !== 0 && <span className='hidden lg:!inline px-2'>|</span> } 
               <Link href={value} className={clsx('hover:underline py-2 mb-2 lg:py-0 lg:mb-0 block lg:inline', {
                   'lg:pr-4': isFirst,
@@ -155,50 +122,50 @@ const LINKS_COLUMNS = [
   {
     title: 'About Us:',
     list: [
-      { value: 'our_company', label: 'Our Company'},
-      { value: 'our_company', label: 'Our Coffee'},
-      { value: 'our_company', label: 'Stories and News'},
-      { value: 'our_company', label: 'Starbucks Archive'},
-      { value: 'our_company', label: 'Investor Relations'},
-      { value: 'our_company', label: 'Customer Service'},
+      { value: '/', label: 'Our Company'},
+      { value: '/', label: 'Our Coffee'},
+      { value: '/', label: 'Stories and News'},
+      { value: '/', label: 'Starbucks Archive'},
+      { value: '/', label: 'Investor Relations'},
+      { value: '/', label: 'Customer Service'},
     ]
   },
   {
     title: 'Careers:',
     list: [
-      { value: 'our_company', label: 'Culture and Values'},
-      { value: 'our_company', label: 'Inclusion, Diversity and Equity'},
-      { value: 'our_company', label: 'College Achievement Plan'},
-      { value: 'our_company', label: 'Alumni Community'},
-      { value: 'our_company', label: 'U.S. Careers'},
-      { value: 'our_company', label: 'International Careers'},
+      { value: '/', label: 'Culture and Values'},
+      { value: '/', label: 'Inclusion, Diversity and Equity'},
+      { value: '/', label: 'College Achievement Plan'},
+      { value: '/', label: 'Alumni Community'},
+      { value: '/', label: 'U.S. Careers'},
+      { value: '/', label: 'International Careers'},
     ]
   },
   {
     title: 'Social Impact:',
     list: [
-      { value: 'our_company', label: 'People '},
-      { value: 'our_company', label: 'Planet '},
-      { value: 'our_company', label: 'Environmental and Social Impact Reporting '},
+      { value: '/', label: 'People '},
+      { value: '/', label: 'Planet '},
+      { value: '/', label: 'Environmental and Social Impact Reporting '},
     ]
   },
   {
     title: 'For Business Partners:',
     list: [
-      { value: 'our_company', label: 'Landlord Support Center'},
-      { value: 'our_company', label: 'Suppliers'},
-      { value: 'our_company', label: 'Corporate Gift Card Sales'},
-      { value: 'our_company', label: 'Office and Foodservice Coffee'},
+      { value: '/', label: 'Landlord Support Center'},
+      { value: '/', label: 'Suppliers'},
+      { value: '/', label: 'Corporate Gift Card Sales'},
+      { value: '/', label: 'Office and Foodservice Coffee'},
     ]
   },
   {
     title: 'Order and Pick Up:',
     list: [
-      { value: 'our_company', label: 'Order on the App'},
-      { value: 'our_company', label: 'Order on the Web'},
-      { value: 'our_company', label: 'Delivery'},
-      { value: 'our_company', label: 'Order and Pick Up Options'},
-      { value: 'our_company', label: 'Explore and Find Coffee for Home'},
+      { value: '/', label: 'Order on the App'},
+      { value: '/', label: 'Order on the Web'},
+      { value: '/', label: 'Delivery'},
+      { value: '/', label: 'Order and Pick Up Options'},
+      { value: '/', label: 'Explore and Find Coffee for Home'},
     ]
   }
 ];
