@@ -37,25 +37,27 @@ const NavDrawer = () => {
 
 
   const renderMenu = () => {
-    return <div className='flex flex-col w-80 px-8'>
-      <div className='my-4 flex justify-end'>
-        <IconButton 
-          onClick={toggleDrawer(false)}
-          className='text-3xl text-black'>
-          <RxCross1/>
-        </IconButton>
-      </div>
-      <ul className="flex flex-col items-start ">
-        {NAV_LINKS.map(({value, label}) => 
-          <Link key={value} 
-            className='py-3 text-black tracking-widest text-lg' 
-            href={value}>{label}</Link>)}
-      </ul>
-      <div className='py-4'>
-        <Divider/>
-      </div>
-      <ActionsButtons/>
-    </div>
+      return (
+        <div onClick={() => setIsOpen(false)} className='flex flex-col w-80 px-8'>
+          <div className='my-4 flex justify-end'>
+            <IconButton 
+              onClick={toggleDrawer(false)}
+              className='text-3xl text-black'>
+              <RxCross1/>
+            </IconButton>
+          </div>
+          <ul className="flex flex-col items-start ">
+            {NAV_LINKS.map(({value, label}) => 
+              <Link key={value} 
+                className='py-3 text-black tracking-widest text-lg' 
+                href={value}>{label}</Link>)}
+          </ul>
+          <div className='py-4'>
+            <Divider/>
+          </div>
+          <ActionsButtons/>
+        </div>
+      )
   }
 
   return (

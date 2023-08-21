@@ -77,9 +77,9 @@ export default function SignUp() {
       </div>
 
       <FormWrapper onSubmit={handleSubmit(onSubmit)}> 
-        <div className='px-12 py-2'>
+        <div className='md:px-12 py-2 text-center md:text-left'>
           <div className='pb-6'>
-            <div className='px-2 py-2 mb-3'> 
+            <div className='px-2 py-2 mb-3 '> 
               <p className='pb-6'>
                 <ReuqiredElement/>
                 indicates required field
@@ -125,7 +125,7 @@ export default function SignUp() {
               }
             />
 
-            <div className='flex justify-end mt-8 '>
+            <div className='flex justify-center md:justify-end mt-8 '>
             {loading 
             ? <LoaderButton/>
             : <Button type="submit" className='text-lg rounded-full py-4 px-6 shadow-xl' color='green' contained>  Create account </Button>}

@@ -59,7 +59,7 @@ export default function SignIn() {
 
   return (
     <div className="container mx-auto bg-white min-h-screen"> 
-     <div className='mx-auto max-w-lg w-full '> 
+     <div className='mx-auto max-w-lg w-full text-center md:text-left'> 
       <h1 className='text-center py-12 mb-2 text-black font-bold text-3xl'>Sign in or create an account</h1>
       <FormWrapper onSubmit={handleSubmit(onSubmit)}> 
         <p className='pb-6'>
@@ -94,13 +94,13 @@ export default function SignIn() {
             }
           />
 
-          <div className='mt-4 flex flex-col space-y-2 '>
+          <div className='mt-4 flex flex-col space-y-2 items-center md:items-start '>
             <Link className='text-green-800 font-bold underline hover:no-underline' href='/'>Forgot your username?</Link>
             <Link className='text-green-800 font-bold underline hover:no-underline' href='/'>Forgot your password?</Link>
           </div>
           
     
-          <div className='flex justify-end mt-8 '>
+          <div className='flex justify-center md:justify-end mt-8'>
             {loading 
             ? <LoaderButton/>
             : <Button type="submit" className='text-lg rounded-full py-4 px-6 shadow-xl' color='green' contained> Sign in </Button>}
